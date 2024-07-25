@@ -17,11 +17,11 @@ export const connectWallet = async () => {
 
         const message = "Welcome to the Vault!";
         const signature = await signer.signMessage(message);
-        console.log(signature);
+        // console.log(signature);
 
-        const URL = ``;
-        const res = axios.post(URL, { signature });
-        console.log(res);
+        const URL = `http://localhost:3000/api/auth/${selectedAccount}`;
+        const res = await axios.post(URL, { signature });
+        // console.log(res);
 
         const contractAddress = "0x12FFd00a87D8AAE797281D69A840ed2e6281611F";
         const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
