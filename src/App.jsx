@@ -11,7 +11,7 @@ function App() {
   return (
     <>
       <Toaster position="bottom-center" />
-      <div className=" w-full h-screen bg-zinc-900 p-10 m-auto text-white text-5xl">
+      <div>
         <Routes>
           <Route path="/home" element={web3State.selectedAccount ? <Home /> : <Navigate to={"/wallet"} />} />
           <Route path="/wallet" element={web3State.selectedAccount ? <Navigate to={"/home"} /> : <Wallet />} />
