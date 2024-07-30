@@ -21,7 +21,8 @@ export const connectWallet = async () => {
 
         const URL = `http://localhost:3000/api/auth/${selectedAccount}`;
         const res = await axios.post(URL, { signature });
-        // console.log(res);
+        // console.log(res.data);
+        localStorage.setItem("jwt", res.data.jwt);
 
         const contractAddress = "0x12FFd00a87D8AAE797281D69A840ed2e6281611F";
         const contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);

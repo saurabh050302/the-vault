@@ -26,10 +26,15 @@ const UploadImage = () => {
     const handleUploadImage = async () => {
         setLoading(true);
         try {
+            const URL = `http://localhost:3000/api/uploadImage`;
             const formData = new FormData();
             formData.set("file", file);
-            const URL = `http://localhost:3000/api/uploadImage`;
-            const res = await axios.post(URL, formData);
+            const config = {
+                headers: {
+                    "x-access-token": localStorage.getItem("jwt")
+                }
+            }
+            const res = await axios.post(URL, formData, config);
             toast.success("Image Uploaded");
             uploadImageHash(res.data.ipfsHash);
         } catch (error) {
@@ -48,7 +53,7 @@ const UploadImage = () => {
             <button
                 onClick={handleUploadImage}
                 disabled={loading || !file}
-                className=' bg-zinc-600 p-2 rounded-md hover:bg-zinc-500'
+                className={`bg-zinc-600 p-2 rounded-md ${loading || !file ? "" : "hover:bg-zinc-500"}`}
             >Upload Image</button>
         </div>
     )
